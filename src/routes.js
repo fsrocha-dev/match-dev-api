@@ -7,7 +7,7 @@ const routes = Router();
 //Cadastrar novo usuário
 routes.post("/users", async (req, res) => {
   try {
-    const { github_user, skills } = req.body;
+    const { github_user, skills, lat, long } = req.body;
 
     const response = await axios.get(
       `https://api.github.com/users/${github_user}`
@@ -17,12 +17,18 @@ routes.post("/users", async (req, res) => {
 
     const skillsArray = skills.split(",").map(skill => skill.trim());
 
+    const location = {
+      type: "Point",
+      coordinates: [long, lat]
+    };
+
     const user = await User.create({
       github_user,
       name,
       avatar: avatar_url,
       bio,
-      skills: skillsArray
+      skills: skillsArray,
+      location
     });
 
     return res.json(user);
