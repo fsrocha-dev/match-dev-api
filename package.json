@@ -1,0 +1,11 @@
+{
+  "name": "match-dev-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fsrocha-dev/match-dev-api.git",
+  "author": "fsrocha-dev <contato.frankrocha@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
