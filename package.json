@@ -5,7 +5,13 @@
   "repository": "git@github.com:fsrocha-dev/match-dev-api.git",
   "author": "fsrocha-dev <contato.frankrocha@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
