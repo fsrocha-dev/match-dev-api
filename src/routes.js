@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const UserController = require("./controllers/UserController");
+const SearchController = require("./controllers/SearchController");
 
 const routes = Router();
 
-//Cadastrar novo usuário
 routes.get("/users", UserController.index);
 routes.post("/users", UserController.store);
+
+routes.post("/search", SearchController.index);
 
 module.exports = routes;
