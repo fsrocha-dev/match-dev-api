@@ -6,27 +6,31 @@ module.exports = {
     try {
       const { github_user, skills, lat, long } = req.body;
 
-      const response = await axios.get(
-        `https://api.github.com/users/${github_user}`
-      );
+      let user = User.findOne({ github_user });
 
-      const { name = login, avatar_url, bio } = response.data;
+      if (!user) {
+        const response = await axios.get(
+          `https://api.github.com/users/${github_user}`
+        );
 
-      const skillsArray = skills.split(",").map(skill => skill.trim());
+        const { name = login, avatar_url, bio } = response.data;
 
-      const location = {
-        type: "Point",
-        coordinates: [long, lat]
-      };
+        const skillsArray = skills.split(",").map(skill => skill.trim());
 
-      const user = await User.create({
-        github_user,
-        name,
-        avatar: avatar_url,
-        bio,
-        skills: skillsArray,
-        location
-      });
+        const location = {
+          type: "Point",
+          coordinates: [long, lat]
+        };
+
+        user = await User.create({
+          github_user,
+          name,
+          avatar: avatar_url,
+          bio,
+          skills: skillsArray,
+          location
+        });
+      }
 
       return res.json(user);
     } catch (err) {
